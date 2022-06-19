@@ -180,7 +180,8 @@ class MoneyManagerQuery:
             self.queryStatement += "FROM ZINOUTCOME z ";
             self.queryStatement += "WHERE z.ztxdatestr ";
             self.queryStatement += "BETWEEN \""+localStartDate+"\" AND \""+localEndDate+"\" ";
-            self.queryStatement += "AND z.zisdel = 0 ";
+            self.queryStatement += "AND z.zisdel = 0 ";       # zisdel flags deleted entries
+            self.queryStatement += "AND z.zdo_type = 1 ";     # Type 1 is "expenses"
             self.queryStatement += "ORDER BY z.zdate ASC";
         return self.queryStatement
 
