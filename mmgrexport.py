@@ -225,7 +225,7 @@ class MoneyManagerQuery:
             retVal = "TD"
         elif pm == "T. Crédito":
             retVal = "TC"
-        elif pm == "Paypal":
+        elif pm == "PayPal":
             retVal = "P"
         else:
             retVal = "INVALID"
