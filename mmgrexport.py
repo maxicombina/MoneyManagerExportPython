@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 #
 #
@@ -176,12 +176,14 @@ class MoneyManagerQuery:
             if self.debugLevel >= 1:
                 print ("Date range: " + localStartDate, "-", localEndDate)
             # TODO: sanitize input
-            self.queryStatement = "SELECT z.zdate, z.ztxdatestr, z.zcategory_name, z.zcontent, z.zamount, z.zasset_nic ";
-            self.queryStatement += "FROM ZINOUTCOME z ";
+            self.queryStatement = "SELECT z.zdate, z.ztxdatestr, c.zname, z.zcontent, z.zamount, a.znicname ";
+            self.queryStatement += "FROM ZASSET a, ZCATEGORY c, ZINOUTCOME z ";
             self.queryStatement += "WHERE z.ztxdatestr ";
             self.queryStatement += "BETWEEN \""+localStartDate+"\" AND \""+localEndDate+"\" ";
-            self.queryStatement += "AND z.zisdel = 0 ";       # zisdel flags deleted entries
-            self.queryStatement += "AND z.zdo_type = 1 ";     # Type 1 is "expenses"
+            self.queryStatement += "AND z.zisdel = 0 ";                  # zisdel flags deleted entries
+            self.queryStatement += "AND z.zdo_type = 1 ";                # Type 1 is "expenses"
+            self.queryStatement += "AND z.ZASSETUID = a.ZUID "           # Join asset (pay method)
+            self.queryStatement += "AND z.ZCATEGORYUID = c.ZUID "        # Join Category
             self.queryStatement += "ORDER BY z.zdate ASC";
         return self.queryStatement
 
