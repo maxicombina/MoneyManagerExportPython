@@ -286,7 +286,7 @@ class MoneyManagerQuery:
 
             retVal += transaction[4] + u"\n"
 
-        print ("Total: ", round(self.totalAmount, 2))
+        retVal += "Total: " + str(round(self.totalAmount, 2));
         return retVal
 
     def toCSV(self):
