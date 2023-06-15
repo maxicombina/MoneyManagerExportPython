@@ -199,7 +199,7 @@ class MoneyManagerQuery:
         else:
             retVal= category
 
-        return retVal
+        return retVal.strip()
         
     def processAmount(self, amount):
         # Transform "x.y" into "x,y". Grab only 2 elems after split(), just in case (I don't trust DB data)
@@ -235,7 +235,7 @@ class MoneyManagerQuery:
         return retVal
 
     def processName(self, tr_name):
-        return tr_name
+        return tr_name.strip()
 
     def getResult(self):
         """Returns list with all the selected transactions, already formatted
